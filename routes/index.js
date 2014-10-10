@@ -13,5 +13,16 @@ router.get("/helloworld", function (req, res) {
 	})
 });
 
+/* new router to be able to pull data from db collection */
+router.get('/userlist', function (req, res) {
+	var db = req.db;
+	var collection = db.get('usercollection');
+	collection.find({}, {}, function(e,docs) {
+		res.render('userlist', {
+			"userlist": docs
+		});
+	});
+});
+
 
 module.exports = router;
